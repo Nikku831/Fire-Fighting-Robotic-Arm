@@ -35,18 +35,6 @@ sim.startSimulation()
 n = 30    # number of points in the trajectory 
 q = generateLinearTrajectory(poses['StartPose'],poses['TestPose1'],n=n,robot=robot)
 
-
-# n = 30    # number of points in the trajectory 
-# q = generateLinearTrajectory(poses['TestPose2'],poses['EndPose'],n=n,robot=robot)
-
-
-# n = 2
-# q = jointAnglesAtTestPoints() 
-
-
-# n=30 # number of points in the trajectory 
-# q = generateCircularTrajectory(poses['TestPose1'],poses['TestPose2'],C=poses['CenterPointC'],n=n,robot=robot)
-
 # assign a position to each joint
 for step in range(n):
      print(f'Step: {step}')

@@ -193,67 +193,6 @@ def generateLinearTrajectory(A: sm.SE3, B: sm.SE3, n:int, robot:rtb.Robot) -> np
 
      return q.T
 
-# ---------- Question 3.2 ---------- #
-
-def generateCircularTrajectory(A:sm.SE3, B:sm.SE3, C:np.ndarray, n:int, robot:rtb.Robot) -> np.ndarray:
-     """
-     Given a start pose A, an end pose B, a point C at the centre of the circle and the number of points n, 
-     this function returns the joint angles required to move the end effector from pose A to pose B along a circular path.
-     The circular path is defined by the circle passing through the positions of A and B with its centre at C.
-     The orientation of the end effector frame can be any smooth interpolation between the orientations at A and B.
-
-     Parameters
-     ----------
-     A
-          the start pose of the end effector frame with respect to the base frame given as an SE(3) object
-     B
-          the end pose of the end effector frame with respect to the base frame given as an SE(3) object
-     C
-          an array of shape 3, representing the position [in meters] of the centre of the circle in the base frame
-     n
-          number of points to generate in the trajectory including the start and end poses
-     robot
-          a Robot object representing the robot
-
-     Returns
-     -------
-     q
-          An array of shape 6,n containing n sets of joint angles [in radians], corresponding to the n points in the trajectory
-
-     """
-     # Vectors from C to A and C to B
-     CA = A.t - C
-     CB = B.t - C
-
-     # Normal vector to the plane of the circle
-     normal_vector = np.cross(CA, CB)
-     normal_vector /= np.linalg.norm(normal_vector)
-
-     # Calculate the angle between CA and CB
-     angle_AB = np.arccos(np.clip(np.dot(CA, CB) / (np.linalg.norm(CA) * np.linalg.norm(CB)), -1.0, 1.0))
-     angles = np.linspace(0, angle_AB, n)
-
-     q = np.zeros((n, robot.n))
-
-     for i, theta in enumerate(angles):
-          # Compute the rotation matrix around the normal vector by theta
-          R =  sm.SO3.AngleAxis(theta, normal_vector).R
-
-          # Calculate the new point on the circle
-          point_on_circle = C + R @ CA
-
-          # Create a new pose by interpolating the orientation from A to B
-          current_pose = sm.SE3(point_on_circle) * sm.SE3.RPY(np.array(A.rpy()) * (1 - i/n) + np.array(B.rpy()) * (i/n), order='xyz')
-
-          # Solve the inverse kinematics for the current pose
-          try:
-               q[i, :] = ikine_with_limits(robot, current_pose, q0=q[i-(i>0),:], itr=50)
-          except ValueError as e:
-               print(f"IK failed at point {i+1}/{n}: {e}")
-               break  
-
-     return q.T
-
 
 # ---------- Question 3.3 ---------- #
 
