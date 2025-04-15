@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+    --primary-color: #e63946; /* Bright red */
+    --primary-dark: #9d0208; /* Dark red */
+    --secondary-color: #1e1e24; /* Dark navy/almost black */
+    --accent-color: #f77f00; /* Orange */
+    --light-bg: #f8f9fa; /* Light background */
+    --white: #ffffff;
+    --text-color: #2b2d42; /* Dark text */
+    --light-text: #f8f9fa; /* Light text */
+    --gradient-bg: linear-gradient(135deg, #e63946 0%, #f77f00 100%); /* Red to orange gradient */
+    --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.7;
+    color: var(--text-color);
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e63946' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Hero section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--gradient-bg);
+    color: var(--white);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: fadeInDown 1s ease;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    font-weight: 300;
+    animation: fadeInUp 1s ease;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    animation: fadeIn 1.5s ease;
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--light-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(0,0,0,0.1);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.btn-secondary:hover {
+    background-color: var(--white);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(0,0,0,0.1);
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    color: var(--white);
+    font-size: 2rem;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+    }
+    40% {
+        transform: translateY(-20px) translateX(-50%);
+    }
+    60% {
+        transform: translateY(-10px) translateX(-50%);
+    }
+}
+
+/* Navigation */
+nav {
+    background-color: rgba(255, 255, 255, 0.95);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+}
+
+nav.scrolled {
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    margin-right: 10px;
+    font-size: 1.8rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Mobile nav */
+.menu-toggle {
+    display: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Main content */
+main {
+    margin-bottom: 50px;
+    padding-top: 80px;
+}
+
+section {
+    margin-bottom: 80px;
+    padding: 50px;
+    background-color: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+section:hover {
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-5px);
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--gradient-bg);
+}
+
+h2 {
+    color: var(--secondary-color);
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+h3 {
+    color: var(--primary-dark);
+    margin: 30px 0 20px 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    color: var(--text-color);
+    line-height: 1.8;
+}
+
+/* Table of Contents */
+.toc {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffefeb 100%); /* Light red tint */
+    position: relative;
+}
+
+.toc ul {
+    list-style-type: none;
+    counter-reset: section;
+}
+
+.toc li {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 35px;
+    transition: all 0.3s ease;
+}
+
+.toc li::before {
+    counter-increment: section;
+    content: counter(section) ".";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: 700;
+    width: 25px;
+    text-align: center;
+}
+
+.toc a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.toc a:hover {
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.toc li:hover {
+    transform: translateX(5px);
+}
+
+/* Code blocks */
+pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 25px;
+    border-radius: 15px;
+    overflow-x: auto;
+    margin: 30px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-left: 5px solid var(--primary-color);
+}
+
+code {
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 30px 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+th, td {
+    padding: 15px 20px;
+    text-align: left;
+}
+
+th {
+    background: var(--gradient-bg);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+tr:nth-child(even) {
+    background-color: #f1f5f9;
+}
+
+tr:hover {
+    background-color: #e2e8f0;
+}
+
+td {
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Images and figures */
+.figure {
+    margin: 40px 0;
+    text-align: center;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.figure:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.figure img {
+    max-width: 100%;
+    border-radius: 15px;
+    transition: all 0.5s ease;
+}
+
+.figure-caption {
+    margin-top: 15px;
+    font-style: italic;
+    color: #64748b;
+    padding: 0 20px 20px;
+    font-size: 0.95rem;
+}
+
+/* Demo section */
+.demo-container {
+    border: none;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    margin: 40px 0;
+    background: linear-gradient(135deg, #ffefeb 0%, #ffe5d9 100%); /* Light orange/red gradient */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.demo-container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 150px;
+    height: 150px;
+    background: var(--primary-color);
+    opacity: 0.1;
+    border-radius: 50%;
+}
+
+.demo-container::after {
+    content: '';
+    position: absolute;
+    bottom: -70px;
+    left: -70px;
+    width: 200px;
+    height: 200px;
+    background: var(--accent-color);
+    opacity: 0.05;
+    border-radius: 50%;
+}
+
+/* References */
+.references ol {
+    padding-left: 20px;
+    counter-reset: refs;
+}
+
+.references li {
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 15px;
+    line-height: 1.7;
+}
+
+.references li::marker {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.card {
+    background-color: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+    padding: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+}
+
+/* Footer */
+footer {
+    background-color: var(--secondary-color);
+    color: var(--light-text);
+    text-align: center;
+    padding: 60px 0 30px;
+    margin-top: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: var(--secondary-color);
+    clip-path: polygon(0 0, 100% 100%, 100% 100%, 0% 100%);
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.social-links {
+    margin: 30px 0;
+}
+
+.social-links a {
+    color: var(--light-text);
+    margin: 0 15px;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--gradient-bg);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.animate-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.animate-section.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+    
+    section {
+        padding: 40px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        border-radius: 0 0 15px 15px;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .nav-links li {
+        margin: 15px 0;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    section {
+        padding: 30px 20px;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav id="mainNav">
+        <div class="nav-container container">
+            <a href="#" class="logo"><i class="fas fa-atom"></i> Project Report</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#literature">Literature Review</a></li>
+                <li><a href="#methodology">Methodology</a></li>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#references">References</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Fire Fighting Robotic Arm</h1>
+            <p>Advancing Fire Safety through Autonomous Robotic Response and Precision Control.</p>
+            <div class="hero-buttons">
+                <a href="#abstract" class="btn btn-primary">Read Abstract</a>
+                <a href="#demo" class="btn btn-secondary">View Demo</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+
+    <main class="container">
+        <section id="abstract" class="animate-section">
+            <h2>Abstract</h2>
+            <p>Fire outbreaks in industrial and hazardous environments pose serious risks to human life, infrastructure, and the environment, especially in areas that are difficult or dangerous for human firefighters to access. This project addresses this critical challenge by developing a 3-DOF RRP (Revolute-Revolute-Prismatic) robotic arm capable of autonomously detecting and suppressing fires. The robotic arm follows a predefined 3D trajectory while continuously scanning for fire sources using onboard sensors. Upon detecting a fire, the arm intelligently interrupts its motion, and the prismatic joint actuates the end-effector downward to simulate water spraying at the fire location. After suppression, the arm retracts and resumes its original path, ensuring efficient area coverage without human intervention. The system is modeled and simulated using MATLAB Simulink and Simscape Multibody, demonstrating real-time responsiveness, precise actuation, and trajectory resumption. This solution showcases the potential of autonomous robotics in enhancing fire response systems, particularly in industrial plants, chemical storage areas, and confined or high-risk zones.</p>
+        </section>
+
+        <section id="toc" class="toc animate-section">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#literature">Literature Review & Related Work</a></li>
+                <li><a href="#methodology">Methodology & Implementation</a></li>
+                <li><a href="#results">Results and Discussion</a></li>
+                <li><a href="#demo">Demo of Simulation</a></li>
+                <li><a href="#conclusion">Conclusion and Future Work</a></li>
+                <li><a href="#references">References</a></li>
+            </ul>
+        </section>
+
+        <section id="introduction" class="animate-section">
+            <h2>Introduction</h2>
+            <p>Fire hazards remain a persistent threat in various industrial and commercial settings, particularly in environments where human access is limited or unsafe. Quick detection and localized suppression of fires are critical to minimizing damage and preventing the spread of flames. Traditional fire safety systems, such as sprinklers or manual extinguishers, often lack the precision and adaptability required for dynamic or high-risk zones.
+
+                To address this issue, this project introduces a robotic fire response system built around a 3-DOF RRP (Revolute-Revolute-Prismatic) robotic arm. The robot is programmed to follow a predefined 3D trajectory while continuously scanning for fire points in its environment. Upon detecting a fire at any location along its path, the system automatically pauses, lowers its end-effector using the prismatic joint, and simulates spraying water directly onto the fire. Once the fire is addressed, the end-effector retracts, and the robot resumes its original trajectory without external intervention.
+                
+                This intelligent behavior is modeled and simulated using MATLAB Simulink and Simscape Multibody, allowing for precise visualization of the robot’s motion and real-time fire suppression actions. By combining autonomous sensing, decision-making, and targeted actuation, this project demonstrates how robotics can play a transformative role in enhancing fire safety systems—especially in environments like chemical plants, warehouses, and other high-risk industrial facilities.</p>
+        </section>
+
+        <section id="literature" class="animate-section">
+            <h2>Literature Review & Related Work</h2>
+                <p>
+                Robotic arms have become a central focus in the design of systems aimed at addressing hazardous tasks, such as firefighting. Their ability to manipulate objects, connect equipment, and operate in extreme environments makes them invaluable in scenarios where human intervention poses serious risks. The following review explores several key studies that have contributed to the field of robotic arm development, particularly in ways that could be applied to fire suppression and rescue operations.
+                </p>
+              
+                <h3>1. Fire Extinguishing Robot with Robotic Arm<br><small>Memon et al., 2018</small></h3>
+                <p>
+                  This paper presents a robot designed to detect and extinguish fires, with the help of a robotic arm that can also clear obstacles along the way. It uses flame, gas, and temperature sensors for detection, and an ultrasonic sensor to spot obstructions. When needed, the arm picks up these obstacles and moves them aside to ensure a clear path to the fire source. A live camera feed is streamed over Wi-Fi for remote monitoring. Though the system includes mobility, the robotic arm is at the core of its effectiveness, allowing the robot to operate independently in cluttered environments.
+                </p>
+              
+                <h3>2. Autonomous Docking with Fire Hydrants<br><small>Yang et al., 2024</small></h3>
+                <p>
+                  One of the more challenging tasks for firefighting robots is connecting a hose to a hydrant without human help. In this study, the researchers developed a control strategy that combines a multilayer perceptron (MLP) with admittance control. The robotic arm uses real-time force feedback to align itself accurately with the hydrant, adjusting its movements to reduce contact force and prevent damage. This method significantly improves the reliability and safety of the docking process, especially in unpredictable outdoor conditions where GPS and vision systems may fall short.
+                </p>
+              
+                <h3>3. Low-Cost Pick and Place Robotic Arm<br><small>Mourya et al., 2015</small></h3>
+                <p>
+                  This work focuses on the design and implementation of a simple 4-degree-of-freedom (DOF) robotic arm built for basic pick-and-place tasks. It’s powered by four servo motors and controlled via an ATmega16 board. The arm was built using lightweight materials and designed for handling small cylindrical objects. While its original purpose wasn’t firefighting, the straightforward design and low cost make it a practical option for integration into firefighting robots that need basic manipulation capabilities.
+                </p>
+              
+                <h3>4. Coordinated Motion for Multi-Arm Robots<br><small>Basile et al., 2012</small></h3>
+                <p>
+                  In this study, the authors address the challenge of coordinating multiple robotic arms to perform complex tasks. Instead of programming each arm individually, they propose a centralized system where tasks are defined at a higher level, and the motion of each arm is calculated automatically. This kind of setup is especially useful in situations where multiple manipulators are needed to work together—such as positioning hoses while spraying water or operating in tight environments.
+                </p>
+              
+                <h3>5. Optimizing Robotic Arm Trajectories<br><small>Romaniuk et al., 2024</small></h3>
+                <p>
+                  Here, the authors look at optimizing the movement of a 3-DOF planar robotic arm using genetic algorithms. Their goal was to reduce the torque needed at each joint while maintaining smooth and precise motion—something that becomes crucial when a robot needs to operate efficiently for extended periods. Though this study was centered around writing tasks, the optimization techniques they describe are highly relevant for any robotic arm that must perform delicate operations, including firefighting.
+                </p>
+              
+                <h3>6. Modular Arm Design Using DH Parameters<br><small>Singh & Singla, 2015</small></h3>
+                <p>
+                  This paper introduces a modular design approach for robotic arms based on Denavit–Hartenberg (DH) parameters. The idea is to allow flexibility in arm design by using interchangeable link modules that can be configured based on specific task requirements. This method is particularly useful in cluttered or complex environments where a standard robot arm might not be effective. For firefighting, this approach could lead to custom arm designs suited to unique building layouts or access challenges.
+                </p>
+              
+                <h3>7. SCARA Robot Modeling and Verification<br><small>Das & Dülger, 2005</small></h3>
+                <p>
+                  This study presents a detailed model of a SCARA-type robotic arm (Serpent 1), including its dynamics, control logic, and experimental validation. Using Lagrangian mechanics and servo motor control, the authors simulated and tested the arm’s ability to perform pick-and-place tasks with precision. The success of this model demonstrates how SCARA arms can be effectively used in real-world operations—something that translates well to controlled fire response tasks like valve turning or tool manipulation.
+                </p>
+              
+                <h3>Summary</h3>
+                <p>
+                  Together, these studies cover a wide range of challenges and solutions related to robotic arms: from basic hardware design and motion planning, to complex cooperative control and adaptability. They show that robotic arms, when properly designed and controlled, can perform precise, autonomous tasks that are critical in firefighting—whether it’s extinguishing flames, connecting hoses, or clearing debris. Each of these contributions provides valuable insights for designing a system that’s not just functional, but robust and adaptable in emergency environments.
+                </p>              
+        </section>
+
+        <section id="methodology" class="animate-section">
+            <h2>Methodology & Implementation</h2>
+            <p>Our approach combines elements of quantum circuit design, optimization theory, and problem-specific heuristics to create an efficient algorithm for solving complex optimization problems.</p>
+            
+            <h3>Problem Formulation</h3>
+            <p>We focus on a class of optimization problems that can be formulated as Quadratic Unconstrained Binary Optimization (QUBO) problems, which take the form:</p>
+            
+            <pre><code>minimize f(x) = x^T Q x
+subject to x_i ∈ {0,1} for all i</code></pre>
+            
+            <p>Where Q is an n×n real-valued matrix and x is a binary vector. This formulation is sufficiently general to represent many NP-hard problems including MAX-CUT, graph coloring, and certain scheduling problems.</p>
+            
+            <h3>Quantum Algorithm Design</h3>
+            <p>Our quantum algorithm consists of three main components:</p>
+            
+            <ol>
+                <li><strong>Problem Embedding:</strong> Converting the QUBO formulation into a quantum Hamiltonian that encodes the objective function</li>
+                <li><strong>Quantum Circuit Construction:</strong> Designing parameterized quantum circuits that prepare states with high probability of representing optimal or near-optimal solutions</li>
+                <li><strong>Adaptive Parameter Optimization:</strong> Using classical optimization techniques to iteratively improve circuit parameters based on measurement outcomes</li>
+            </ol>
+            
+            <p>The core of our approach is a novel circuit architecture that reduces the resource requirements compared to standard QAOA implementations while maintaining solution quality:</p>
+            
+            <pre><code>def create_quantum_circuit(parameters, problem_hamiltonian):
+    """
+    Creates the parameterized quantum circuit for our algorithm
+    
+    Args:
+        parameters: List of variational parameters
+        problem_hamiltonian: The problem encoded as a Hamiltonian
+        
+    Returns:
+        Quantum circuit object
+    """
+    n_qubits = problem_hamiltonian.n_qubits
+    circuit = QuantumCircuit(n_qubits)
+    
+    # Initial state preparation
+    circuit.h(range(n_qubits))
+    
+    # Apply parameterized layers
+    p = len(parameters) // 2
+    for i in range(p):
+        # Problem Hamiltonian evolution
+        apply_problem_unitary(circuit, problem_hamiltonian, parameters[i])
+        
+        # Mixer Hamiltonian evolution
+        apply_mixer_unitary(circuit, parameters[p+i])
+        
+        # Add adaptive measurement-based feedback (our novel contribution)
+        if i < p-1:
+            apply_adaptive_layer(circuit, parameters, i)
+    
+    return circuit</code></pre>
+            
+            <h3>Implementation Details</h3>
+            <p>We implemented our algorithm using Qiskit for quantum circuit simulation and executed experiments on both IBM Quantum simulators and actual quantum hardware. The classical optimization component utilizes gradient-free methods, specifically the Nelder-Mead simplex algorithm, to optimize circuit parameters.</p>
+            
+            <p>To address the limitations of current quantum hardware, we developed several techniques:</p>
+            
+            <ul>
+                <li>Circuit decomposition methods to reduce two-qubit gate count</li>
+                <li>Error mitigation strategies including zero-noise extrapolation</li>
+                <li>Problem partitioning for instances exceeding available qubit counts</li>
+            </ul>
+            
+            <div class="figure">
+                <img src="/api/placeholder/800/400" alt="Quantum Circuit Diagram">
+                <div class="figure-caption">Figure 1: Schematic representation of our quantum circuit architecture, highlighting the adaptive measurement layers.</div>
+            </div>
+        </section>
+
+        <section id="results" class="animate-section">
+            <h2>Results and Discussion</h2>
+            <p>We evaluated our algorithm on a diverse set of optimization problems, comparing its performance against both classical solvers and other quantum approaches.</p>
+            
+            <h3>Performance Metrics</h3>
+            <p>The primary metrics used for evaluation were:</p>
+            <ul>
+                <li>Solution quality (approximation ratio relative to known optimal solutions)</li>
+                <li>Computational resources required (circuit depth, number of gates, classical processing time)</li>
+                <li>Scalability with problem size</li>
+            </ul>
+            
+            <h3>Experimental Results</h3>
+            <p>Our algorithm demonstrated consistent advantages over classical methods for problem instances with specific structural properties:</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">MAX-CUT Problems</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>For random 3-regular graphs with up to 20 nodes, our approach achieved approximation ratios averaging 0.95, compared to 0.88 for greedy algorithms.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Portfolio Optimization</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>For a 50-asset portfolio selection problem with constraints, our method found solutions within 2% of the provable optimum in significantly less time than branch-and-bound methods.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Job Shop Scheduling</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>For scheduling instances with up to 15 jobs and 5 machines, our approach reduced makespan by 12% compared to priority-rule heuristics.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Performance Analysis</h3>
+            <p>The performance gains observed can be attributed to several factors:</p>
+            
+            <ol>
+                <li>The quantum algorithm's ability to explore the solution space more efficiently through superposition</li>
+                <li>Our adaptive parameter optimization approach, which converges to high-quality parameters in fewer iterations</li>
+                <li>The problem decomposition strategy, which effectively handles larger problem instances</li>
+            </ol>
+            
+            <p>However, we also observed limitations, particularly for problems with highly constrained solution spaces or complex objective functions that require deep circuits to represent accurately.</p>
+            
+            <div class="figure">
+                <img src="/api/placeholder/800/500" alt="Performance Comparison Chart">
+                <div class="figure-caption">Figure 2: Performance comparison between our quantum approach, standard QAOA, and classical algorithms across different problem sizes.</div>
+            </div>
+            
+            <h3>Hardware Implementation Challenges</h3>
+            <p>When executed on actual quantum hardware, we encountered several challenges:</p>
+            
+            <ul>
+                <li>Noise and decoherence significantly impacted solution quality for circuits with more than 4 QAOA layers</li>
+                <li>Limited connectivity necessitated additional SWAP gates, increasing circuit depth</li>
+                <li>Variability in qubit performance required adaptive compilation strategies</li>
+            </ul>
+            
+            <p>Our error mitigation techniques were able to partially address these issues, recovering solution quality to within 85% of simulator results for small to medium problem instances.</p>
+        </section>
+
+        <section id="demo" class="animate-section">
+            <h2>Demo of Simulation</h2>
+            <p>To demonstrate the practical application of our algorithm, we developed an interactive simulation that allows users to explore how different problem parameters affect solution quality and performance.</p>
+            
+            <div class="demo-container">
+                <h3>Interactive Quantum Optimizer Simulation</h3>
+                <p>This demo simulates our quantum optimization algorithm on customizable problem instances. Use the controls below to adjust parameters and see the results in real-time.</p>
+                
+                <div class="figure">
+                    <img src="/api/placeholder/800/450" alt="Interactive Simulation Screenshot">
+                    <div class="figure-caption">Figure 3: Screenshot of our interactive quantum optimization simulator showing solution convergence over iterations.</div>
+                </div>
+                
+                <p>The complete simulation tool is available in our open-source repository, along with documentation and example problem instances.</p>
+            </div>
+            
+            <h3>Key Features of the Demo</h3>
+            <ul>
+                <li>Visualization of the quantum state evolution throughout the optimization process</li>
+                <li>Real-time comparison with classical algorithms on the same problem instances</li>
+                <li>Analysis of how noise and errors affect solution quality</li>
+                <li>Parameter sensitivity analysis to understand algorithm robustness</li>
+            </ul>
+            
+            <p>The simulator provides valuable insights into the inner workings of quantum optimization algorithms and serves as an educational tool for researchers and practitioners new to the field.</p>
+        </section>
+
+        <section id="conclusion" class="animate-section">
+            <h2>Conclusion and Future Work</h2>
+            <p>This research has demonstrated the potential of quantum computing approaches for solving complex optimization problems. Our algorithm shows promising results, particularly for problem instances with specific structural characteristics that align well with quantum processing capabilities.</p>
+            
+            <h3>Key Contributions</h3>
+            <p>The primary contributions of this work include:</p>
+            <ul>
+                <li>A novel quantum circuit architecture that reduces resource requirements while maintaining solution quality</li>
+                <li>An adaptive parameter optimization approach that improves convergence speed</li>
+                <li>Comprehensive benchmarking against both classical and quantum alternatives</li>
+                <li>Practical techniques for implementing quantum optimization algorithms on current hardware</li>
+            </ul>
+            
+            <h3>Limitations</h3>
+            <p>Despite these advances, several limitations remain:</p>
+            <ul>
+                <li>The quantum advantage is currently limited to specific problem structures</li>
+                <li>Hardware constraints still prevent application to large-scale industrial problems</li>
+                <li>The parameter optimization process can be computationally intensive</li>
+            </ul>
+            
+            <h3>Future Research Directions</h3>
+            <p>Based on our findings, we identify several promising directions for future research:</p>
+            <ol>
+                <li>Extending our approach to handle a broader class of optimization problems, particularly those with complex constraints</li>
+                <li>Developing more efficient parameter optimization methods specifically designed for quantum circuits</li>
+                <li>Exploring circuit compilation techniques to better utilize the limited connectivity of current quantum hardware</li>
+                <li>Investigating hybrid approaches that dynamically allocate subproblems between quantum and classical resources</li>
+            </ol>
+            
+            <p>As quantum hardware continues to improve, we anticipate that the performance gap between quantum and classical approaches for optimization problems will widen, ultimately leading to practical quantum advantage for real-world applications. Our work represents a step toward this goal, providing both theoretical insights and practical implementation strategies.</p>
+        </section>
+
+        <section id="references" class="references animate-section">
+            <h2>References</h2>
+            <ol>
+                <li>Farhi, E., Goldstone, J., & Gutmann, S. (2014). A Quantum Approximate Optimization Algorithm. arXiv:1411.4028.</li>
+                <li>McGeoch, C. C., & Wang, C. (2020). Experimental Evaluation of an Adiabiatic Quantum System for Combinatorial Optimization. ACM Transactions on Computing Systems, 37(4), 1-36.</li>
+                <li>Peruzzo, A., et al. (2019). A variational eigenvalue solver on a photonic quantum processor. Nature Communications, 10, 4213.</li>
+                <li>Zhou, L., et al. (2023). Quantum Approximate Optimization Algorithm with Constraints: A Case Study on the Max-k-Colorable-Subgraph Problem. Quantum, 7, 1092.</li>
+                <li>Albash, T., & Lidar, D. A. (2022). Adiabatic quantum computation. Reviews of Modern Physics, 94(2), 025001.</li>
+                <li>Harrigan, M. P., et al. (2021). Quantum approximate optimization of non-planar graph problems on a planar superconducting processor. Nature Physics, 17, 332-336.</li>
+                <li>Cerezo, M., et al. (2021). Variational Quantum Algorithms. Nature Reviews Physics, 3, 625-644.</li>
+                <li>Otterbach, J. S., et al. (2020). Unsupervised Machine Learning on a Hybrid Quantum Computer. arXiv:1712.05771.</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Advanced Quantum Computing Research Lab</h3>
+            <p>Pushing the boundaries of quantum algorithms for practical applications</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+            
+            <p>&copy; 2025 Quantum Computing Research. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Navigation scroll behavior
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('mainNav');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+                backToTop.classList.add('show');
+            } else {
+                nav.classList.remove('scrolled');
+                backToTop.classList.remove('show');
+            }
+            
+            // Animate sections when they come into view
+            const sections = document.querySelectorAll('.animate-section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight - 100) {
+                    section.classList.add('animated');
+                }
+            });
+        });
+        
+        // Back to top button
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
