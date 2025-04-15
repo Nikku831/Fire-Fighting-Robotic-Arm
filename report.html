@@ -831,145 +831,74 @@ footer::before {
         </section>
 
         <section id="methodology" class="animate-section">
-            <h2>Methodology & Implementation</h2>
-            <p>Our approach combines elements of quantum circuit design, optimization theory, and problem-specific heuristics to create an efficient algorithm for solving complex optimization problems.</p>
-            
-            <h3>Problem Formulation</h3>
-            <p>We focus on a class of optimization problems that can be formulated as Quadratic Unconstrained Binary Optimization (QUBO) problems, which take the form:</p>
-            
-            <pre><code>minimize f(x) = x^T Q x
-subject to x_i ∈ {0,1} for all i</code></pre>
-            
-            <p>Where Q is an n×n real-valued matrix and x is a binary vector. This formulation is sufficiently general to represent many NP-hard problems including MAX-CUT, graph coloring, and certain scheduling problems.</p>
-            
-            <h3>Quantum Algorithm Design</h3>
-            <p>Our quantum algorithm consists of three main components:</p>
-            
-            <ol>
-                <li><strong>Problem Embedding:</strong> Converting the QUBO formulation into a quantum Hamiltonian that encodes the objective function</li>
-                <li><strong>Quantum Circuit Construction:</strong> Designing parameterized quantum circuits that prepare states with high probability of representing optimal or near-optimal solutions</li>
-                <li><strong>Adaptive Parameter Optimization:</strong> Using classical optimization techniques to iteratively improve circuit parameters based on measurement outcomes</li>
-            </ol>
-            
-            <p>The core of our approach is a novel circuit architecture that reduces the resource requirements compared to standard QAOA implementations while maintaining solution quality:</p>
-            
-            <pre><code>def create_quantum_circuit(parameters, problem_hamiltonian):
-    """
-    Creates the parameterized quantum circuit for our algorithm
-    
-    Args:
-        parameters: List of variational parameters
-        problem_hamiltonian: The problem encoded as a Hamiltonian
-        
-    Returns:
-        Quantum circuit object
-    """
-    n_qubits = problem_hamiltonian.n_qubits
-    circuit = QuantumCircuit(n_qubits)
-    
-    # Initial state preparation
-    circuit.h(range(n_qubits))
-    
-    # Apply parameterized layers
-    p = len(parameters) // 2
-    for i in range(p):
-        # Problem Hamiltonian evolution
-        apply_problem_unitary(circuit, problem_hamiltonian, parameters[i])
-        
-        # Mixer Hamiltonian evolution
-        apply_mixer_unitary(circuit, parameters[p+i])
-        
-        # Add adaptive measurement-based feedback (our novel contribution)
-        if i < p-1:
-            apply_adaptive_layer(circuit, parameters, i)
-    
-    return circuit</code></pre>
-            
-            <h3>Implementation Details</h3>
-            <p>We implemented our algorithm using Qiskit for quantum circuit simulation and executed experiments on both IBM Quantum simulators and actual quantum hardware. The classical optimization component utilizes gradient-free methods, specifically the Nelder-Mead simplex algorithm, to optimize circuit parameters.</p>
-            
-            <p>To address the limitations of current quantum hardware, we developed several techniques:</p>
-            
-            <ul>
-                <li>Circuit decomposition methods to reduce two-qubit gate count</li>
-                <li>Error mitigation strategies including zero-noise extrapolation</li>
-                <li>Problem partitioning for instances exceeding available qubit counts</li>
-            </ul>
-            
-            <div class="figure">
-                <img src="/api/placeholder/800/400" alt="Quantum Circuit Diagram">
-                <div class="figure-caption">Figure 1: Schematic representation of our quantum circuit architecture, highlighting the adaptive measurement layers.</div>
-            </div>
+            <h2>Methodology and Implementation</h2>
+
+                <p>
+                The objective of this project is to simulate a 3-DOF RRP robotic arm capable of autonomously detecting fire points and performing localized suppression actions in response. The development process was carried out through the following key stages:
+                </p>
+
+                <h3>1. System Modeling and Kinematic Design</h3>
+                <p>
+                The robotic arm was modeled with two revolute joints and one prismatic joint, enabling it to reach various points in 3D space and perform vertical actuation for water spraying. The Denavit-Hartenberg (DH) parameters were defined to accurately represent the robot's kinematics. MATLAB Simulink with Simscape Multibody was used to construct the physical and mechanical structure of the robot, including links, joints, and motion constraints.
+                </p>
+
+                <h3>2. Trajectory Planning</h3>
+                <p>
+                A custom XYZ trajectory was defined for the end-effector, guiding the robot through a series of waypoints that simulate patrol or coverage of a designated area. The trajectory was implemented using Lookup Tables and time-based functions to ensure smooth and continuous motion of the arm.
+                </p>
+
+                <h3>3. Fire Point Detection Logic</h3>
+                <p>
+                Fire points were defined at specific X-locations within the robot’s workspace. A sensing mechanism was simulated using conditional logic blocks that compare the robot’s current X-coordinate with the predefined fire positions. When the end-effector aligns with a fire point, a trigger signal is generated.
+                </p>
+
+                <h3>4. Reactive Motion Control</h3>
+                <p>
+                Upon fire detection, the normal trajectory is temporarily halted, and the prismatic joint is actuated to lower the end-effector vertically to simulate water spraying. A time-controlled delay is added to allow for the suppression action, after which the end-effector retracts and resumes its motion along the original trajectory. This behavior is governed using a Finite State Machine (FSM) or logical state flow blocks that manage transitions between movement, fire suppression, and continuation states.
+                </p>
+
+                <h3>5. Visualization and Animation</h3>
+                <p>
+                Using Simscape Mechanics Explorer, the entire motion of the robotic arm is visualized in real-time. Fire points are represented visually, and their visibility is controlled dynamically to disappear once the robot sprays them. This allows observers to clearly understand the reactive behavior of the robot during the simulation.
+                </p>
+
+                <h3>6. System Integration and Testing</h3>
+                <p>
+                The model was rigorously tested across various scenarios with different fire point configurations to ensure robustness, proper synchronization of suppression actions, and smooth trajectory resumption. Simulation parameters were tuned for realistic performance and time synchronization.
+                </p>
+
         </section>
 
         <section id="results" class="animate-section">
             <h2>Results and Discussion</h2>
-            <p>We evaluated our algorithm on a diverse set of optimization problems, comparing its performance against both classical solvers and other quantum approaches.</p>
-            
-            <h3>Performance Metrics</h3>
-            <p>The primary metrics used for evaluation were:</p>
-            <ul>
-                <li>Solution quality (approximation ratio relative to known optimal solutions)</li>
-                <li>Computational resources required (circuit depth, number of gates, classical processing time)</li>
-                <li>Scalability with problem size</li>
-            </ul>
-            
-            <h3>Experimental Results</h3>
-            <p>Our algorithm demonstrated consistent advantages over classical methods for problem instances with specific structural properties:</p>
-            
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">MAX-CUT Problems</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>For random 3-regular graphs with up to 20 nodes, our approach achieved approximation ratios averaging 0.95, compared to 0.88 for greedy algorithms.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Portfolio Optimization</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>For a 50-asset portfolio selection problem with constraints, our method found solutions within 2% of the provable optimum in significantly less time than branch-and-bound methods.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Job Shop Scheduling</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>For scheduling instances with up to 15 jobs and 5 machines, our approach reduced makespan by 12% compared to priority-rule heuristics.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <h3>Performance Analysis</h3>
-            <p>The performance gains observed can be attributed to several factors:</p>
-            
-            <ol>
-                <li>The quantum algorithm's ability to explore the solution space more efficiently through superposition</li>
-                <li>Our adaptive parameter optimization approach, which converges to high-quality parameters in fewer iterations</li>
-                <li>The problem decomposition strategy, which effectively handles larger problem instances</li>
-            </ol>
-            
-            <p>However, we also observed limitations, particularly for problems with highly constrained solution spaces or complex objective functions that require deep circuits to represent accurately.</p>
-            
-            <div class="figure">
-                <img src="/api/placeholder/800/500" alt="Performance Comparison Chart">
-                <div class="figure-caption">Figure 2: Performance comparison between our quantum approach, standard QAOA, and classical algorithms across different problem sizes.</div>
-            </div>
-            
-            <h3>Hardware Implementation Challenges</h3>
-            <p>When executed on actual quantum hardware, we encountered several challenges:</p>
-            
-            <ul>
-                <li>Noise and decoherence significantly impacted solution quality for circuits with more than 4 QAOA layers</li>
-                <li>Limited connectivity necessitated additional SWAP gates, increasing circuit depth</li>
-                <li>Variability in qubit performance required adaptive compilation strategies</li>
-            </ul>
-            
-            <p>Our error mitigation techniques were able to partially address these issues, recovering solution quality to within 85% of simulator results for small to medium problem instances.</p>
+
+                <p>
+                The simulation successfully validates the intended behavior of the 3-DOF RRP robotic arm in a fire suppression scenario. As the robot follows its predefined trajectory, it actively monitors for fire points and reacts autonomously when a fire is detected. The following key results and observations were recorded:
+                </p>
+
+                <ul>
+                <li>
+                    <strong>Reactive Suppression:</strong> The robot was able to detect fire points based on X-coordinate matching and initiate downward actuation to simulate water spraying precisely at the affected location.
+                </li>
+                <li>
+                    <strong>Seamless Trajectory Resumption:</strong> After performing the suppression task, the robotic arm successfully returned to its original path without any loss in motion continuity or mechanical interference.
+                </li>
+                <li>
+                    <strong>Fire Point Visibility:</strong> Fire points were visually represented and dynamically hidden once the robot addressed them, aiding in intuitive real-time feedback and analysis within Simscape Mechanics Explorer.
+                </li>
+                <li>
+                    <strong>Robust Control Logic:</strong> The system responded consistently across different test cases with varied fire point locations, demonstrating reliable state transitions and signal synchronization.
+                </li>
+                </ul>
+                <br>
+                <p>
+                The simulation proved that a combination of rule-based control logic and mechanical actuation can create an effective autonomous response mechanism for localized hazard management. However, certain limitations were identified. The detection logic is currently based on fixed coordinates, and the robot cannot yet handle overlapping or dynamically appearing fires. Moreover, the time delay for spraying is constant, which may not be optimal for varying fire intensities or distances.
+                </p>
+
+                <p>
+                Overall, the system shows promise for practical implementation in industrial safety applications, and forms a strong base for future work involving adaptive sensing, dynamic path planning, and real-time fire mapping.
+                </p>
+
         </section>
 
         <section id="demo" class="animate-section">
@@ -1000,36 +929,27 @@ subject to x_i ∈ {0,1} for all i</code></pre>
         </section>
 
         <section id="conclusion" class="animate-section">
-            <h2>Conclusion and Future Work</h2>
-            <p>This research has demonstrated the potential of quantum computing approaches for solving complex optimization problems. Our algorithm shows promising results, particularly for problem instances with specific structural characteristics that align well with quantum processing capabilities.</p>
-            
-            <h3>Key Contributions</h3>
-            <p>The primary contributions of this work include:</p>
-            <ul>
-                <li>A novel quantum circuit architecture that reduces resource requirements while maintaining solution quality</li>
-                <li>An adaptive parameter optimization approach that improves convergence speed</li>
-                <li>Comprehensive benchmarking against both classical and quantum alternatives</li>
-                <li>Practical techniques for implementing quantum optimization algorithms on current hardware</li>
-            </ul>
-            
-            <h3>Limitations</h3>
-            <p>Despite these advances, several limitations remain:</p>
-            <ul>
-                <li>The quantum advantage is currently limited to specific problem structures</li>
-                <li>Hardware constraints still prevent application to large-scale industrial problems</li>
-                <li>The parameter optimization process can be computationally intensive</li>
-            </ul>
-            
-            <h3>Future Research Directions</h3>
-            <p>Based on our findings, we identify several promising directions for future research:</p>
-            <ol>
-                <li>Extending our approach to handle a broader class of optimization problems, particularly those with complex constraints</li>
-                <li>Developing more efficient parameter optimization methods specifically designed for quantum circuits</li>
-                <li>Exploring circuit compilation techniques to better utilize the limited connectivity of current quantum hardware</li>
-                <li>Investigating hybrid approaches that dynamically allocate subproblems between quantum and classical resources</li>
-            </ol>
-            
-            <p>As quantum hardware continues to improve, we anticipate that the performance gap between quantum and classical approaches for optimization problems will widen, ultimately leading to practical quantum advantage for real-world applications. Our work represents a step toward this goal, providing both theoretical insights and practical implementation strategies.</p>
+            <h2>Conclusion</h2>
+                <p>
+                This project successfully demonstrates the simulation of a 3-DOF RRP robotic arm capable of detecting and suppressing fires autonomously within a predefined environment. By integrating trajectory planning, real-time sensing, and reactive motion control, the system showcases a practical and scalable approach to localized fire response using robotic automation. The seamless transition between fire detection, suppression, and trajectory resumption highlights the effectiveness of intelligent decision-making in robotic systems. This simulation lays a solid foundation for deploying autonomous fire mitigation solutions in high-risk industrial or inaccessible zones.
+                </p>
+
+            <h2>Future Work</h2>
+                <p>
+                To enhance the scope and functionality of the system, future work can focus on the following directions:
+                </p>
+                <ul>
+                    <li><strong>Sensor Integration:</strong> Implementing realistic thermal or smoke sensors to improve detection accuracy and simulate real-world sensing conditions.</li>
+                    <li><strong>Dynamic Path Planning:</strong> Incorporating real-time path replanning algorithms to enable the robot to adapt its trajectory dynamically based on fire locations or obstacles.</li>
+                    <li><strong>Multiple Fire Points:</strong> Extending the logic to handle multiple simultaneous or sequential fire occurrences, optimizing the suppression sequence.</li>
+                    <li><strong>Real-Time Deployment:</strong> Transitioning the simulation into a physical prototype using embedded systems and ROS-based control frameworks.</li>
+                    <li><strong>Machine Learning Integration:</strong> Using predictive models to forecast fire-prone areas based on historical patterns and environmental parameters.</li>
+                </ul>
+                <br>
+                <p>
+                By pursuing these enhancements, the system can evolve into a fully autonomous, intelligent firefighting robot capable of operating effectively in complex real-world environments.
+            </p>
+
         </section>
 
         <section id="references" class="references animate-section">
