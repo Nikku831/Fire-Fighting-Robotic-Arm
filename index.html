@@ -6,6 +6,11 @@
     <title>Project Report</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
     <style>
         :root {
     --primary-color: #e63946; /* Bright red */
@@ -741,7 +746,7 @@ footer::before {
     <main class="container">
         <section id="abstract" class="animate-section">
             <h2>Abstract</h2>
-            <p>Fire outbreaks in industrial and hazardous environments pose serious risks to human life, infrastructure, and the environment, especially in areas that are difficult or dangerous for human firefighters to access. This project addresses this critical challenge by developing a 3-DOF RRP (Revolute-Revolute-Prismatic) robotic arm capable of autonomously detecting and suppressing fires. The robotic arm follows a predefined 3D trajectory while continuously scanning for fire sources using onboard sensors. Upon detecting a fire, the arm intelligently interrupts its motion, and the prismatic joint actuates the end-effector downward to simulate water spraying at the fire location. After suppression, the arm retracts and resumes its original path, ensuring efficient area coverage without human intervention. The system is modeled and simulated using MATLAB Simulink and Simscape Multibody, demonstrating real-time responsiveness, precise actuation, and trajectory resumption. This solution showcases the potential of autonomous robotics in enhancing fire response systems, particularly in industrial plants, chemical storage areas, and confined or high-risk zones.</p>
+            <p>Fire outbreaks in industrial and hazardous environments pose serious risks to human life, infrastructure, and the environment—especially in areas that are difficult or dangerous for human firefighters to access. This project addresses this critical challenge by developing a 3-DOF RRP (Revolute-Revolute-Prismatic) robotic arm capable of autonomously detecting and suppressing fires. The robotic arm follows a predefined 3D trajectory while continuously monitoring fire intensity through onboard sensors. In this setup, the presence of fire is assumed to be constant, but active suppression is only triggered when the detected intensity crosses a predefined threshold. Upon such detection, the arm intelligently interrupts its motion, and the prismatic joint actuates the end-effector downward to simulate water spraying at the fire location. Once the threat is mitigated, the arm retracts and seamlessly resumes its original path, ensuring efficient area coverage without human intervention. The system is modeled and simulated using MATLAB Simulink and Simscape Multibody, demonstrating real-time responsiveness, threshold-based actuation, and trajectory resumption. This solution highlights the potential of autonomous robotics in enhancing fire response systems, particularly in industrial plants, chemical storage areas, and confined or high-risk zones.</p>
         </section>
 
         <section id="toc" class="toc animate-section">
@@ -760,11 +765,13 @@ footer::before {
 
         <section id="introduction" class="animate-section">
             <h2>Introduction</h2>
-            <p>Fire hazards remain a persistent threat in various industrial and commercial settings, particularly in environments where human access is limited or unsafe. Quick detection and localized suppression of fires are critical to minimizing damage and preventing the spread of flames. Traditional fire safety systems, such as sprinklers or manual extinguishers, often lack the precision and adaptability required for dynamic or high-risk zones.
+            <p>Fire hazards remain a persistent threat in various industrial and commercial settings, especially in environments where human access is limited, hazardous, or impractical. Rapid detection and localized suppression are critical to minimizing damage and containing the spread of fire. However, traditional fire safety systems—such as sprinklers or manual extinguishers—often lack the precision, responsiveness, and adaptability required in dynamic, high-risk zones.
 
-                To address this issue, this project introduces a robotic fire response system built around a 3-DOF RRP (Revolute-Revolute-Prismatic) robotic arm. The robot is programmed to follow a predefined 3D trajectory while continuously scanning for fire points in its environment. Upon detecting a fire at any location along its path, the system automatically pauses, lowers its end-effector using the prismatic joint, and simulates spraying water directly onto the fire. Once the fire is addressed, the end-effector retracts, and the robot resumes its original trajectory without external intervention.
+                To address these limitations, this project presents a robotic fire response solution utilizing a 3-DOF RRP (Revolute-Revolute-Prismatic) robotic arm. The system is designed to follow a predefined 3D trajectory while continuously monitoring fire intensity using onboard sensors. In this scenario, ambient fire is assumed to be persistently present within the environment. However, active suppression is triggered only when the fire's intensity exceeds a predefined threshold, indicating a potentially dangerous escalation.
                 
-                This intelligent behavior is modeled and simulated using MATLAB Simulink and Simscape Multibody, allowing for precise visualization of the robot’s motion and real-time fire suppression actions. By combining autonomous sensing, decision-making, and targeted actuation, this project demonstrates how robotics can play a transformative role in enhancing fire safety systems—especially in environments like chemical plants, warehouses, and other high-risk industrial facilities.</p>
+                When such a threshold is crossed, the robotic arm intelligently interrupts its motion, actuates its prismatic joint to lower the end-effector, and simulates spraying water directly at the affected zone. After extinguishing the threat, the end-effector retracts, and the robot resumes its original scanning trajectory autonomously.
+                
+                The complete system is modeled and simulated using MATLAB Simulink and Simscape Multibody, providing detailed visualization of the robot's movement, threshold-based response mechanism, and real-time actuation behavior. By integrating autonomous sensing, conditional decision-making, and precision targeting, the project illustrates the role of robotics in transforming fire safety—particularly in industrial plants, chemical storage facilities, and other hazardous environments.</p>
         </section>
 
         <section id="literature" class="animate-section">
@@ -772,10 +779,10 @@ footer::before {
                 <p>
                 Robotic arms have become a central focus in the design of systems aimed at addressing hazardous tasks, such as firefighting. Their ability to manipulate objects, connect equipment, and operate in extreme environments makes them invaluable in scenarios where human intervention poses serious risks. The following review explores several key studies that have contributed to the field of robotic arm development, particularly in ways that could be applied to fire suppression and rescue operations.
                 </p>
-              
-                <h3>1. Fire Extinguishing Robot with Robotic Arm<br><small>Memon et al., 2018</small></h3>
+
+                <h3>1. Optimizing Robotic Arm Trajectories<br><small>Romaniuk et al., 2024</small></h3>
                 <p>
-                  This paper presents a robot designed to detect and extinguish fires, with the help of a robotic arm that can also clear obstacles along the way. It uses flame, gas, and temperature sensors for detection, and an ultrasonic sensor to spot obstructions. When needed, the arm picks up these obstacles and moves them aside to ensure a clear path to the fire source. A live camera feed is streamed over Wi-Fi for remote monitoring. Though the system includes mobility, the robotic arm is at the core of its effectiveness, allowing the robot to operate independently in cluttered environments.
+                  Here, the authors look at optimizing the movement of a 3-DOF planar robotic arm using genetic algorithms. Their goal was to reduce the torque needed at each joint while maintaining smooth and precise motion—something that becomes crucial when a robot needs to operate efficiently for extended periods. Though this study was centered around writing tasks, the optimization techniques they describe are highly relevant for any robotic arm that must perform delicate operations, including firefighting.
                 </p>
               
                 <h3>2. Autonomous Docking with Fire Hydrants<br><small>Yang et al., 2024</small></h3>
@@ -783,24 +790,24 @@ footer::before {
                   One of the more challenging tasks for firefighting robots is connecting a hose to a hydrant without human help. In this study, the researchers developed a control strategy that combines a multilayer perceptron (MLP) with admittance control. The robotic arm uses real-time force feedback to align itself accurately with the hydrant, adjusting its movements to reduce contact force and prevent damage. This method significantly improves the reliability and safety of the docking process, especially in unpredictable outdoor conditions where GPS and vision systems may fall short.
                 </p>
               
-                <h3>3. Low-Cost Pick and Place Robotic Arm<br><small>Mourya et al., 2015</small></h3>
+                <h3>3. Fire Extinguishing Robot with Robotic Arm<br><small>Memon et al., 2018</small></h3>
+                <p>
+                  This paper presents a robot designed to detect and extinguish fires, with the help of a robotic arm that can also clear obstacles along the way. It uses flame, gas, and temperature sensors for detection, and an ultrasonic sensor to spot obstructions. When needed, the arm picks up these obstacles and moves them aside to ensure a clear path to the fire source. A live camera feed is streamed over Wi-Fi for remote monitoring. Though the system includes mobility, the robotic arm is at the core of its effectiveness, allowing the robot to operate independently in cluttered environments.
+                </p>
+
+                <h3>4. Low-Cost Pick and Place Robotic Arm<br><small>Mourya et al., 2015</small></h3>
                 <p>
                   This work focuses on the design and implementation of a simple 4-degree-of-freedom (DOF) robotic arm built for basic pick-and-place tasks. It’s powered by four servo motors and controlled via an ATmega16 board. The arm was built using lightweight materials and designed for handling small cylindrical objects. While its original purpose wasn’t firefighting, the straightforward design and low cost make it a practical option for integration into firefighting robots that need basic manipulation capabilities.
                 </p>
               
-                <h3>4. Coordinated Motion for Multi-Arm Robots<br><small>Basile et al., 2012</small></h3>
-                <p>
-                  In this study, the authors address the challenge of coordinating multiple robotic arms to perform complex tasks. Instead of programming each arm individually, they propose a centralized system where tasks are defined at a higher level, and the motion of each arm is calculated automatically. This kind of setup is especially useful in situations where multiple manipulators are needed to work together—such as positioning hoses while spraying water or operating in tight environments.
-                </p>
-              
-                <h3>5. Optimizing Robotic Arm Trajectories<br><small>Romaniuk et al., 2024</small></h3>
-                <p>
-                  Here, the authors look at optimizing the movement of a 3-DOF planar robotic arm using genetic algorithms. Their goal was to reduce the torque needed at each joint while maintaining smooth and precise motion—something that becomes crucial when a robot needs to operate efficiently for extended periods. Though this study was centered around writing tasks, the optimization techniques they describe are highly relevant for any robotic arm that must perform delicate operations, including firefighting.
-                </p>
-              
-                <h3>6. Modular Arm Design Using DH Parameters<br><small>Singh & Singla, 2015</small></h3>
+                <h3>5. Modular Arm Design Using DH Parameters<br><small>Singh & Singla, 2015</small></h3>
                 <p>
                   This paper introduces a modular design approach for robotic arms based on Denavit–Hartenberg (DH) parameters. The idea is to allow flexibility in arm design by using interchangeable link modules that can be configured based on specific task requirements. This method is particularly useful in cluttered or complex environments where a standard robot arm might not be effective. For firefighting, this approach could lead to custom arm designs suited to unique building layouts or access challenges.
+                </p>
+
+                <h3>6. Coordinated Motion for Multi-Arm Robots<br><small>Basile et al., 2012</small></h3>
+                <p>
+                  In this study, the authors address the challenge of coordinating multiple robotic arms to perform complex tasks. Instead of programming each arm individually, they propose a centralized system where tasks are defined at a higher level, and the motion of each arm is calculated automatically. This kind of setup is especially useful in situations where multiple manipulators are needed to work together—such as positioning hoses while spraying water or operating in tight environments.
                 </p>
               
                 <h3>7. SCARA Robot Modeling and Verification<br><small>Das & Dülger, 2005</small></h3>
@@ -810,80 +817,127 @@ footer::before {
               
                 <h3>Summary</h3>
                 <p>
-                  Together, these studies cover a wide range of challenges and solutions related to robotic arms: from basic hardware design and motion planning, to complex cooperative control and adaptability. They show that robotic arms, when properly designed and controlled, can perform precise, autonomous tasks that are critical in firefighting—whether it’s extinguishing flames, connecting hoses, or clearing debris. Each of these contributions provides valuable insights for designing a system that’s not just functional, but robust and adaptable in emergency environments.
+                    The reviewed literature highlights the evolving role of robotic arms in high-risk environments, particularly in fire suppression and emergency response. Across these studies, several recurring themes emerge—modularity, adaptability, precision control, and autonomy—all of which are crucial for the development of effective firefighting robotic systems.
+
+                    Memon et al. (2018) demonstrated the viability of integrating sensory systems and obstacle-handling capabilities into a robotic arm, laying the groundwork for autonomous navigation in cluttered environments. Yang et al. (2024) expanded on this by showcasing intelligent force-controlled docking with fire hydrants, highlighting how machine learning and admittance control can enhance safety and accuracy during physical interaction with infrastructure.
+                    
+                    Mourya et al. (2015) offered insights into low-cost, servo-driven arm architectures, proving that even basic systems can be adapted for useful manipulation tasks in emergency scenarios. In contrast, Basile et al. (2012) addressed the complexity of multi-arm coordination, which is essential for simultaneous actions like hose deployment and equipment handling.
+                    
+                    Romaniuk et al. (2024) introduced trajectory optimization using genetic algorithms, a strategy especially relevant for reducing joint load and improving long-term performance during continuous firefighting operations. Singh & Singla (2015) emphasized the value of modular, DH-parameter-based arm designs, enabling custom configurations tailored to diverse environments and spatial constraints. Lastly, Das & Dülger (2005) validated SCARA models for precision control, a critical requirement in repetitive fire mitigation tasks like valve manipulation or targeted extinguishing.
+                    
+                    Collectively, these studies demonstrate that the effectiveness of a robotic firefighting system hinges not only on its hardware but also on intelligent control, real-time adaptability, and environment-specific optimization. These findings directly informed the current project's design, where a 3-DOF RRP robotic arm integrates threshold-based fire detection, autonomous suppression, and trajectory resumption. By synthesizing advancements across multiple domains—from sensor integration and trajectory planning to mechanical modularity—this project builds upon existing research to propose a comprehensive and robust firefighting robotic solution.
                 </p>              
         </section>
 
         <section id="methodology" class="animate-section">
             <h2>Methodology and Implementation</h2>
-
-                <p>
-                The objective of this project is to simulate a 3-DOF RRP robotic arm capable of autonomously detecting fire points and performing localized suppression actions in response. The development process was carried out through the following key stages:
-                </p>
-
-                <h3>1. System Modeling and Kinematic Design</h3>
-                <p>
-                The robotic arm was modeled with two revolute joints and one prismatic joint, enabling it to reach various points in 3D space and perform vertical actuation for water spraying. The Denavit-Hartenberg (DH) parameters were defined to accurately represent the robot's kinematics. MATLAB Simulink with Simscape Multibody was used to construct the physical and mechanical structure of the robot, including links, joints, and motion constraints.
-                </p>
-
-                <h3>2. Trajectory Planning</h3>
-                <p>
-                A custom XYZ trajectory was defined for the end-effector, guiding the robot through a series of waypoints that simulate patrol or coverage of a designated area. The trajectory was implemented using Lookup Tables and time-based functions to ensure smooth and continuous motion of the arm.
-                </p>
-
-                <h3>3. Fire Point Detection Logic</h3>
-                <p>
-                Fire points were defined at specific X-locations within the robot’s workspace. A sensing mechanism was simulated using conditional logic blocks that compare the robot’s current X-coordinate with the predefined fire positions. When the end-effector aligns with a fire point, a trigger signal is generated.
-                </p>
-
-                <h3>4. Reactive Motion Control</h3>
-                <p>
-                Upon fire detection, the normal trajectory is temporarily halted, and the prismatic joint is actuated to lower the end-effector vertically to simulate water spraying. A time-controlled delay is added to allow for the suppression action, after which the end-effector retracts and resumes its motion along the original trajectory. This behavior is governed using a Finite State Machine (FSM) or logical state flow blocks that manage transitions between movement, fire suppression, and continuation states.
-                </p>
-
-                <h3>5. Visualization and Animation</h3>
-                <p>
-                Using Simscape Mechanics Explorer, the entire motion of the robotic arm is visualized in real-time. Fire points are represented visually, and their visibility is controlled dynamically to disappear once the robot sprays them. This allows observers to clearly understand the reactive behavior of the robot during the simulation.
-                </p>
-
-                <h3>6. System Integration and Testing</h3>
-                <p>
-                The model was rigorously tested across various scenarios with different fire point configurations to ensure robustness, proper synchronization of suppression actions, and smooth trajectory resumption. Simulation parameters were tuned for realistic performance and time synchronization.
-                </p>
-
-        </section>
-
-        <section id="results" class="animate-section">
-            <h2>Results and Discussion</h2>
-
-                <p>
-                The simulation successfully validates the intended behavior of the 3-DOF RRP robotic arm in a fire suppression scenario. As the robot follows its predefined trajectory, it actively monitors for fire points and reacts autonomously when a fire is detected. The following key results and observations were recorded:
-                </p>
-
-                <ul>
-                <li>
-                    <strong>Reactive Suppression:</strong> The robot was able to detect fire points based on X-coordinate matching and initiate downward actuation to simulate water spraying precisely at the affected location.
-                </li>
-                <li>
-                    <strong>Seamless Trajectory Resumption:</strong> After performing the suppression task, the robotic arm successfully returned to its original path without any loss in motion continuity or mechanical interference.
-                </li>
-                <li>
-                    <strong>Fire Point Visibility:</strong> Fire points were visually represented and dynamically hidden once the robot addressed them, aiding in intuitive real-time feedback and analysis within Simscape Mechanics Explorer.
-                </li>
-                <li>
-                    <strong>Robust Control Logic:</strong> The system responded consistently across different test cases with varied fire point locations, demonstrating reliable state transitions and signal synchronization.
-                </li>
-                </ul>
-                <br>
-                <p>
-                The simulation proved that a combination of rule-based control logic and mechanical actuation can create an effective autonomous response mechanism for localized hazard management. However, certain limitations were identified. The detection logic is currently based on fixed coordinates, and the robot cannot yet handle overlapping or dynamically appearing fires. Moreover, the time delay for spraying is constant, which may not be optimal for varying fire intensities or distances.
-                </p>
-
-                <p>
-                Overall, the system shows promise for practical implementation in industrial safety applications, and forms a strong base for future work involving adaptive sensing, dynamic path planning, and real-time fire mapping.
-                </p>
-
-        </section>
+          
+            <p>
+              The objective of this project is to simulate a 3-DOF RRP robotic arm capable of autonomously detecting fire points and performing localized suppression actions in response. The development process was carried out through the following key stages:
+            </p>
+          
+            <h3>1. System Modeling and Kinematic Design</h3>
+            <p>
+              The robotic arm was modeled with two revolute joints and one prismatic joint, enabling it to reach various points in 3D space and perform vertical actuation for water spraying. The Denavit–Hartenberg (DH) parameters were defined to accurately represent the robot's kinematics:
+            </p>
+          
+            <table>
+              <thead>
+                <tr>
+                  <th>Joint</th><th>α (alpha)</th><th>a (link length)</th><th>d (offset)</th><th>θ (theta)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>0–1</td><td>0</td><td>0</td><td>0</td><td>θ₁</td></tr>
+                <tr><td>1–2</td><td>0</td><td>L₁</td><td>0</td><td>θ₂</td></tr>
+                <tr><td>2–3</td><td>0</td><td>L₂</td><td>d</td><td>0</td></tr>
+              </tbody>
+            </table>
+          
+            <p>
+              The DH table was used to construct the multibody system in Simulink. Rigid transforms and joint blocks were configured to reflect the spatial relationships between links, and each joint was actuated using signal inputs for real-time control.
+            </p>
+          
+            <h3>2. Trajectory Planning</h3>
+            <p>
+              A predefined XYZ trajectory was implemented using lookup tables for θ₁ and θ₂, simulating a scanning or patrol motion across a workspace. This ensured that the robot could inspect every region while maintaining fluid movement.
+            </p>
+          
+            <h3>3. Fire Point Detection and Thresholding</h3>
+            <p>
+              Fire points were assigned virtual intensity values. Rather than reacting to all fire signals, a comparator block was used to detect when the fire intensity exceeded a specific threshold, triggering suppression only when necessary.
+            </p>
+          
+            <h3>4. ADMM-Inspired Control Strategy</h3>
+            <p>
+              To coordinate continuous trajectory tracking with dynamic suppression, an ADMM-inspired optimization framework was used. The robot's control logic was divided into two subsystems: a trajectory tracking module and a fire suppression module, both synchronized using a shared consensus variable.
+            </p>
+            <p>
+              The optimization objective is to minimize the distance between the end-effector and the fire source, while maintaining a minimum safe distance:
+            </p>
+          
+            <p>
+              $$ \min_{\mathbf{x}} \|\mathbf{x} - \mathbf{x}_{\text{fire}}\|^2 \quad \text{subject to} \quad \|\mathbf{x} - \mathbf{x}_{\text{fire}}\| \geq d_{\text{safe}} $$
+            </p>
+          
+            <p>
+              Introducing an auxiliary variable \( \mathbf{z} \), we reformulate the problem using ADMM as:
+            </p>
+          
+            <p>
+              $$ \min_{\mathbf{x}, \mathbf{z}} \|\mathbf{x} - \mathbf{x}_{\text{fire}}\|^2 + \mathbb{I}_{\{ \|\mathbf{z} - \mathbf{x}_{\text{fire}} \| \geq d_{\text{safe}} \}}(\mathbf{z}) \quad \text{subject to } \mathbf{x} = \mathbf{z} $$
+            </p>
+          
+            <p>Where \( \mathbb{I}_{\{\cdot\}} \) is the indicator function that enforces the safety constraint. The ADMM updates are:</p>
+          
+            <ul>
+              <li><strong>x-update:</strong><br> 
+                $$ \mathbf{x}^{k+1} := \arg\min_{\mathbf{x}} \ \|\mathbf{x} - \mathbf{x}_{\text{fire}}\|^2 + \frac{\rho}{2} \|\mathbf{x} - \mathbf{z}^k + \mathbf{u}^k\|^2 $$
+              </li>
+              <li><strong>z-update (Projection):</strong><br>
+                $$ \mathbf{z}^{k+1} := \text{Proj}_{\|\cdot - \mathbf{x}_{\text{fire}}\| \geq d_{\text{safe}}}(\mathbf{x}^{k+1} + \mathbf{u}^k) $$
+              </li>
+              <li><strong>u-update:</strong><br>
+                $$ \mathbf{u}^{k+1} := \mathbf{u}^k + \mathbf{x}^{k+1} - \mathbf{z}^{k+1} $$
+              </li>
+            </ul>
+          
+            <h3>5. Safe Distance Formulation</h3>
+            <p>
+              The safe distance from the fire is calculated as a weighted combination of two components:
+            </p>
+          
+            <ul>
+              <li><strong>Spray-based distance:</strong><br>
+                $$ d_{\text{spray}} = \frac{h}{\tan(\theta)} $$
+              </li>
+              <li><strong>Thermal-based distance:</strong><br>
+                $$ d_{\text{thermal}} = \frac{k}{T} \quad \text{for } T > 0 $$
+              </li>
+            </ul>
+          
+            <p>Combined as:</p>
+          
+            <p>
+              $$ d_{\text{safe}} = w_1 \cdot d_{\text{spray}} + w_2 \cdot d_{\text{thermal}}, \quad \text{where } w_1 + w_2 = 1 $$
+            </p>
+          
+            <h3>6. Reactive Motion and State Control</h3>
+            <p>
+              The control logic was implemented using Stateflow to manage transitions between scanning, suppression, and recovery. Once suppression is triggered:
+            </p>
+            <ul>
+              <li>Trajectory execution is paused</li>
+              <li>The prismatic joint lowers the nozzle</li>
+              <li>A fixed delay simulates extinguishing</li>
+              <li>The nozzle retracts and motion resumes</li>
+            </ul>
+          
+            <h3>7. Visualization and Testing</h3>
+            <p>
+              The simulation was visualized using Simscape Mechanics Explorer. Fire points were represented by colored spheres that disappeared upon successful suppression. The model was tested with various fire intensities and positions, validating robustness, safe suppression, and uninterrupted resumption of trajectory.
+            </p>
+          </section>                    
 
         <section id="demo" class="animate-section">
             <h2>Demonstration of Simulation</h2>
