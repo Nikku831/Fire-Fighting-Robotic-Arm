@@ -902,25 +902,48 @@ footer::before {
               </li>
             </ul>
           
-            <h3>5. Safe Distance Formulation</h3>
-            <p>
-              The safe distance from the fire is calculated as a weighted combination of two components:
-            </p>
-          
-            <ul>
-              <li><strong>Spray-based distance:</strong><br>
-                $$ d_{\text{spray}} = \frac{h}{\tan(\theta)} $$
-              </li>
-              <li><strong>Thermal-based distance:</strong><br>
-                $$ d_{\text{thermal}} = \frac{k}{T} \quad \text{for } T > 0 $$
-              </li>
-            </ul>
-          
-            <p>Combined as:</p>
-          
-            <p>
-              $$ d_{\text{safe}} = w_1 \cdot d_{\text{spray}} + w_2 \cdot d_{\text{thermal}}, \quad \text{where } w_1 + w_2 = 1 $$
-            </p>
+          <h3>5. Safe Distance Formulation</h3>
+                <p>
+                The safe distance from the fire is computed dynamically using both spray mechanics and thermal radiation principles. The combined safety logic ensures the robot avoids overheating while maintaining effective suppression.
+                </p>
+
+                <ul>
+                <li><strong>Spray-based distance:</strong><br>
+                    $$ d_{\text{spray}} = \frac{h}{\tan(\theta)} $$
+                </li>
+
+                <li><strong>Thermal-based distance (Stefan–Boltzmann formulation):</strong><br>
+                    Starting from the radiated heat power:
+                    $$ Q = \sigma A T^4 $$
+                    Where:
+                    <ul>
+                    <li>σ = 5.67 × 10<sup>−8</sup> W/m²K⁴</li>
+                    <li>A = effective area of fire (m²)</li>
+                    <li>T = fire temperature in Kelvin (K)</li>
+                    </ul>
+
+                    The heat flux at distance <i>d</i> is:
+                    $$ H = \frac{Q}{4\pi d^2} $$
+
+                    Solving for <i>d</i> and substituting <i>Q</i>:
+                    $$ d_{\text{thermal}} = \sqrt{\frac{\sigma A T^4}{4\pi H_{\text{max}}}} $$
+
+                    This can be simplified as:
+                    $$ d_{\text{thermal}} = k \cdot T^2, \quad \text{where} \quad k = \sqrt{\frac{\sigma A}{4\pi H_{\text{max}}}} $$
+                </li>
+                </ul>
+
+                <p>
+                <strong>Combined safe distance:</strong><br>
+                $$ d_{\text{safe}} = w_1 \cdot d_{\text{spray}} + w_2 \cdot d_{\text{thermal}}, \quad \text{where } w_1 + w_2 = 1 $$
+                </p>
+
+                <p><strong>Interpretation:</strong></p>
+                <ul>
+                <li>As fire temperature increases, radiative heat rises sharply → robot must maintain greater distance</li>
+                <li>This thermal formulation enables the robot to dynamically adjust suppression range in real time</li>
+                </ul>
+
           
             <h3>6. Reactive Motion and State Control</h3>
             <p>
